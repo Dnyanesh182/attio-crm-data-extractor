@@ -1,0 +1,58 @@
+{
+    "manifest_version": 3,
+    "name": "Attio CRM Data Extractor",
+    "version": "1.0.0",
+    "description": "Extract Contacts, Deals, and Tasks from Attio CRM and view them in a dashboard",
+    "permissions": [
+        "storage",
+        "tabs",
+        "activeTab",
+        "alarms",
+        "scripting"
+    ],
+    "host_permissions": [
+        "https://app.attio.com/*",
+        "https://*.attio.com/*"
+    ],
+    "background": {
+        "service_worker": "src/background/service-worker.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://app.attio.com/*",
+                "https://*.attio.com/*"
+            ],
+            "js": [
+                "src/content/index.js"
+            ],
+            "run_at": "document_idle"
+        }
+    ],
+    "action": {
+        "default_popup": "src/popup/index.html",
+        "default_title": "Attio CRM Extractor",
+        "default_icon": {
+            "16": "src/assets/icons/icon16.png",
+            "48": "src/assets/icons/icon48.png",
+            "128": "src/assets/icons/icon128.png"
+        }
+    },
+    "icons": {
+        "16": "src/assets/icons/icon16.png",
+        "48": "src/assets/icons/icon48.png",
+        "128": "src/assets/icons/icon128.png"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "src/assets/*",
+                "src/popup/assets/*"
+            ],
+            "matches": [
+                "https://app.attio.com/*",
+                "https://*.attio.com/*"
+            ]
+        }
+    ]
+}
