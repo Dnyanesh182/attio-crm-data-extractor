@@ -1,0 +1,31 @@
+{
+  "name": "attio-crm-extractor",
+  "version": "1.0.0",
+  "description": "Chrome Extension to extract Contacts, Deals, and Tasks from Attio CRM",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build:all",
+    "build": "npm run build:all",
+    "build:all": "npm run build:popup && npm run build:scripts && npm run copy:assets",
+    "build:popup": "vite build",
+    "build:scripts": "esbuild src/content/index.ts src/background/service-worker.ts --bundle --outdir=dist/src --outbase=src --format=iife --target=chrome100",
+    "copy:assets": "node -e \"const fs=require('fs');fs.cpSync('manifest.json','dist/manifest.json');fs.cpSync('src/assets','dist/src/assets',{recursive:true})\"",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.260",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.17",
+    "esbuild": "^0.20.0",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12"
+  }
+}
